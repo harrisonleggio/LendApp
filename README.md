@@ -1,3 +1,3 @@
 # LendApp
 
-# ALWAYS develop locally on branches -> submit pull requests to master
+## ALWAYS develop locally on branches -> submit pull requests to master
