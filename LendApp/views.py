@@ -1,6 +1,6 @@
 from LendApp import *
 from flask import request
-from db_connect import *
+import dwollav2
 
 @app.route('/')
 def index():
@@ -15,9 +15,5 @@ def process_transaction():
 
     output_vals = 'Sender: {} Receiver: {} Amount: {} TransactionID: {}'.format(sender, receiver, amount, transactionid)
 
-    insert_transaction = '''Insert into transactions values ({},'{}','{}',{})'''.format(transactionid, sender, receiver, amount)
-
-    query = db_execute(insert_transaction)
-    return query
-
+    return output_vals
 
