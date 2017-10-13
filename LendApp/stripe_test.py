@@ -24,4 +24,5 @@ test_charge = stripe.Charge.create(
     receipt_email='harrisonleggio@my.uri.edu'
 )
 
+# output of test charge
 print test_charge
