@@ -1,22 +1,11 @@
 from LendApp import *
-from flask import request
-from LendApp.stripe_modules import card, charge
+from flask import request, render_template
+from LendApp.stripe_modules import card, charge, payout
 import stripe
 
 @app.route('/')
 def index():
-    return 'hello world'
-
-@app.route('/transaction')
-def process_transaction():
-    sender = request.args.get('sender')
-    receiver = request.args.get('receiver')
-    amount = request.args.get('amount')
-    transactionid = request.args.get('transactionid')
-
-    output_vals = 'Sender: {} Receiver: {} Amount: {} TransactionID: {}'.format(sender, receiver, amount, transactionid)
-
-    return output_vals
+    return 'Lend App'
 
 
 @app.route('/card_token')
@@ -44,3 +33,17 @@ def generate_charge(token, amount, description, receipt_email):
     print ch_token
     return ch_token['id']
 
+
+@app.route('/customer_payout')
+def customer_payout():
+    account_number = request.args.get('account_number')
+    routing_number = request.args.get('routing_number')
+    country = request.args.get('country')
+    currency = request.args.get('currency')
+    name = request.args.get('name')
+
+    bank_id = payout.bank(account_number, routing_number, country, currency, name)
+    bank = bank_id.create_customer()
+
+    print bank
+    return bank['id']
