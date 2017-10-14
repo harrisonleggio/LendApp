@@ -10,7 +10,7 @@ class card_token:
 
         stripe.api_key = 'sk_test_6zvC0J40crBpuNmGBIapguU3'
 
-    def card_token(self):
+    def generate_card_token(self):
         generate = stripe.Token.create(
             card = {
             'number': self.number,
