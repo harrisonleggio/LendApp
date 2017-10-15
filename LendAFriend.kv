@@ -1,0 +1,48 @@
+#: kivy 1.10.0
+
+
+
+<Button>:
+    size_hint: .5, .1
+
+<Request>:
+    Button:
+        pos_hint: {'right':1, 'y':0}
+        text: 'Request'
+        on_press:
+            root.manager.current = 'request'
+    Button:
+        pos_hint: {'left':1, 'bottom':0}
+        text: 'Send'
+        on_press:
+            root.manager.current = 'send'
+
+<Send>:
+    Button:
+        pos_hint: {'right':1, 'y':0}
+        text: 'Request'
+        on_press:
+            root.manager.current = 'request'
+    Button:
+        pos_hint: {'left':1, 'bottom':0}
+        text: 'Send'
+        on_press:
+            root.manager.current = 'send'
+
+
+
+<Manager>:
+    id: screen_manager
+
+    request_screen: request_screen
+    send_screen: send_screen
+
+    Request:
+        id: request_screen
+        name: 'request'
+        manager: screen_manager
+
+    Send:
+        id: send_screen
+        name: 'send'
+        manager: screen_manager
