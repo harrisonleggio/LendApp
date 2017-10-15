@@ -1,5 +1,5 @@
 from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.properties import ObjectProperty
 
 
@@ -20,7 +20,7 @@ class Manager(ScreenManager):
 class LendAFriend(App):
 
     def build(self):
-        m = Manager(transition=FadeTransition())
+        m = Manager(transition=SlideTransition())
         return m
 
 
