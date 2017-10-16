@@ -1,7 +1,8 @@
 from LendApp import *
 from flask import request, render_template
 from LendApp.stripe_modules import card, charge, payout
-import stripe
+from LendApp import db
+from models import Transaction
 
 @app.route('/')
 def index():
@@ -22,7 +23,7 @@ def generate_card_token():
     generate = card.card_token(number, exp_month, exp_year, cvc)
     card_token = generate.generate_card_token()
 
-    print stripe.Token.retrieve(card_token)
+    #print stripe.Token.retrieve(card_token)
     return generate_charge(card_token, amount, description, receipt_email)
 
 
@@ -30,7 +31,11 @@ def generate_charge(token, amount, description, receipt_email):
     generate = charge.charge_token(amount, description, receipt_email, token)
     ch_token = generate.generate_charge_token()
 
-    print ch_token
+    tran = Transaction(id=ch_token['id'], amount=ch_token['amount'], receipt_email=ch_token['receipt_email'])
+    db.session.add(tran)
+    db.session.commit()
+
+    print ch_token['id']
     return ch_token['id']
 
 
