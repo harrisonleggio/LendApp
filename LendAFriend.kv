@@ -1,21 +1,22 @@
 #: kivy 1.10.0
 
 
-<Button>:
-    size_hint: .5, .1
 
 <Request>:
+
     Label:
         text: 'Request Money'
         pos_hint: {'x':0, 'y':0.45}
         font_size: 30
     Button:
+        size_hint: .5, .1
         pos_hint: {'right':1, 'y':0}
         text: 'Request'
         on_press:
             root.manager.current = 'request'
             root.manager.transition.direction = 'right'
     Button:
+        size_hint: .5, .1
         pos_hint: {'left':1, 'bottom':0}
         text: 'Send'
         on_press:
@@ -23,17 +24,57 @@
             root.manager.transition.direction = 'left'
 
 <Send>:
+
+    amount_input: amount
+    receiver_input: receiver
+    interest_input: interest
+
+    FloatLayout:
+
+        Label:
+            text: 'Amount'
+            pos_hint: {'right':.9, 'y':.31}
+        TextInput:
+            id: amount
+            multiline: False
+            pos_hint: {'x':0.5, 'y':.78}
+            size_hint: .15, .06
+        Label:
+            text: 'Receiver'
+            pos_hint: {'right':.9, 'y':.21}
+        TextInput:
+            id: receiver
+            multiline: False
+            pos_hint: {'x':0.5, 'y':.68}
+            size_hint: .15, .06
+        Label:
+            text: 'Interest'
+            pos_hint: {'right':.9, 'y':.11}
+        TextInput:
+            id: interest
+            multiline: False
+            pos_hint: {'x':0.5, 'y':.58}
+            size_hint: .15, .06
+        Button:
+            size_hint: .2, .06
+            pos_hint: {'x':0.4, 'y':.3}
+            text: 'Submit'
+
+            on_press: root.process_amount()
+
     Label:
         text: 'Send Money'
         pos_hint: {'x':0, 'y':0.45}
         font_size: 30
     Button:
+        size_hint: .5, .1
         pos_hint: {'right':1, 'y':0}
         text: 'Request'
         on_press:
             root.manager.current = 'request'
             root.manager.transition.direction = 'right'
     Button:
+        size_hint: .5, .1
         pos_hint: {'left':1, 'bottom':0}
         text: 'Send'
         on_press:
